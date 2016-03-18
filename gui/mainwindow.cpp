@@ -5,7 +5,10 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
 ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    connect(ui->pushButton, SIGNAL(clicked()), this, SLOT(loadButtonClicked()));
+
+    connect(ui->loadButton, SIGNAL(clicked()), this, SLOT(loadButtonClicked()));
+    connect(ui->saveButton, SIGNAL(clicked()), this, SLOT(saveButtonClicked()));
+    connect(ui->applyButton, SIGNAL(clicked()), this, SLOT(applyButtonClicked()));
 }
 
 MainWindow::~MainWindow()
@@ -27,4 +30,21 @@ void MainWindow::loadButtonClicked()
       scene->setSceneRect(image.rect());
       ui->graphicsView->setScene(scene);
   }
+}
+
+void MainWindow::applyButtonClicked()
+{
+    if(ui->filterCorners->isChecked())
+    {
+
+    }
+    if(ui->filterEdges->isChecked())
+    {
+
+    }
+}
+
+void MainWindow::saveButtonclicked()
+{
+
 }

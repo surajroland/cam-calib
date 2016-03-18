@@ -7,6 +7,7 @@
 #include <QPixmap>
 #include <QMessageBox>
 #include <QGraphicsPixmapItem>
+#include <QRadioButton>
 
 namespace Ui {
 class MainWindow;
@@ -20,8 +21,14 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+signals:
+    void init();
+
 private slots:
     void loadButtonClicked();
+    void applyButtonClicked();
+
+    void on_saveButton_clicked();
 
 private:
     Ui::MainWindow *ui;
