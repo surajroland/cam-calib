@@ -44,7 +44,7 @@ void MainWindow::applyButtonClicked()
     }
 }
 
-void MainWindow::saveButtonclicked()
+void MainWindow::saveButtonClicked()
 {
 
 }

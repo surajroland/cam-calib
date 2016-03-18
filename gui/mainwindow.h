@@ -27,8 +27,7 @@ signals:
 private slots:
     void loadButtonClicked();
     void applyButtonClicked();
-
-    void on_saveButton_clicked();
+    void saveButtonClicked();
 
 private:
     Ui::MainWindow *ui;
