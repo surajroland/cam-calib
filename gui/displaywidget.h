@@ -1,6 +1,0 @@
-#ifndef DISPLAYWIDGET_H
-#define DISPLAYWIDGET_H
-
-
-
-#endif // DISPLAYWIDGET_H

@@ -8,6 +8,7 @@
 #include <QMessageBox>
 #include <QGraphicsPixmapItem>
 #include <QRadioButton>
+#include <QString>
 
 namespace Ui {
 class MainWindow;
@@ -21,8 +22,8 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-signals:
-    void init();
+//signals:
+//    void applySelectedFilter();
 
 private slots:
     void loadButtonClicked();
@@ -31,9 +32,11 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+
+    QString fileName;
     QPixmap image;
     QImage  *imageObject;
-    QGraphicsScene *scene;
+    QGraphicsScene *scene;    
 };
 
 #endif // MAINWINDOW_H

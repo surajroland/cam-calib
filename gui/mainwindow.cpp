@@ -18,7 +18,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::loadButtonClicked()
 {
-  QString fileName = QFileDialog::getOpenFileName(this,"Open Image File",QDir::currentPath());
+  fileName = QFileDialog::getOpenFileName(this,"Open Image File",QDir::currentPath());
 
   if(!fileName.isEmpty())
   {
