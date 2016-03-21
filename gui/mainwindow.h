@@ -9,9 +9,12 @@
 #include <QGraphicsPixmapItem>
 #include <QRadioButton>
 #include <QString>
+#include <processors/improc.h>
 
-namespace Ui {
-class MainWindow;
+
+namespace Ui
+{
+    class MainWindow;
 }
 
 class MainWindow : public QMainWindow
@@ -22,8 +25,8 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-//signals:
-//    void applySelectedFilter();
+signals:
+    void applyFilter(FeatureDetectors::filter h, QImage inputImage);
 
 private slots:
     void loadButtonClicked();

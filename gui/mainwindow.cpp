@@ -32,19 +32,23 @@ void MainWindow::loadButtonClicked()
   }
 }
 
+
+void MainWindow::saveButtonClicked()
+{
+    fileName = QFileDialog::getSaveFileName(this,"Open Image File",QDir::currentPath());
+    QFile file(fileName);
+    file.open(QIODevice::WriteOnly);
+    image.save(&file, "PNG");
+}
+
 void MainWindow::applyButtonClicked()
 {
     if(ui->filterCorners->isChecked())
     {
-
+        emit applyFilter(FeatureDetectors::CORNERS, *imageObject);
     }
     if(ui->filterEdges->isChecked())
     {
-
+        emit applyFilter(FeatureDetectors::EDGES, *imageObject);
     }
-}
-
-void MainWindow::saveButtonClicked()
-{
-
 }
