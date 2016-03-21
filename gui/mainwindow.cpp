@@ -32,6 +32,14 @@ void MainWindow::loadButtonClicked()
   }
 }
 
+void MainWindow::displayProcessedImage(QImage ImageToDisplay)
+{
+    image = QPixmap::fromImage(ImageToDisplay);
+    scene = new QGraphicsScene(this);
+    scene->addPixmap(image);
+    scene->setSceneRect(image.rect());
+    ui->graphicsView->setScene(scene);
+}
 
 void MainWindow::saveButtonClicked()
 {

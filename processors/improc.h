@@ -18,20 +18,22 @@ public:
 
      enum filter {CORNERS, EDGES};
 
-     void applyShiThomasiCornerDetector();
-     void applySobelFilter();
-     void Mat2Qpix(cv::Mat matImage);
+     void applyShiThomasiCornerDetector(void);
+     void applySobelFilter(void);
+     void convertMat2QImage(void);
+     void convertQImage2Mat(void);
 
 signals:
      void returnQImageToMainwindow(QImage processesdImage);
 
 private slots:
-    void QImage2Mat(QImage inputImage);
-    void setFilter(FeatureDetectors::filter _h);
+     void applyFilterOnInputImage(QImage inputImage);
+     void setFilter(FeatureDetectors::filter _h);
 
 private:
-    cv::Mat outMatImage;
-    QImage  outQImage;
+    cv::Mat ImageToProcess;
+    QImage  InOutQImage;
+
     filter h;
 };
 

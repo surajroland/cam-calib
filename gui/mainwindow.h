@@ -33,6 +33,7 @@ private slots:
     void loadButtonClicked();
     void applyButtonClicked();
     void saveButtonClicked();
+    void displayProcessedImage(QImage ImageToDisplay);
 
 private:
     Ui::MainWindow *ui;
