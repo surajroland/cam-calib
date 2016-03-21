@@ -15,7 +15,11 @@ int main(int argc, char *argv[])
     MainWindow w ;
     FeatureDetectors feat;
 
-    QObject::connect(&w, SIGNAL(applyFilter(FeatureDetectors::filter h, QImage inputImage)), &feat, SLOT(QImage2Mat(QImage inputImage)));
+    QObject::connect(&w, SIGNAL(sendImageToProcessor(QImage)),
+                     &feat, SLOT(QImage2Mat(QImage)));
+
+    QObject::connect(&w, SIGNAL(sendSelectedFilter(FeatureDetectors::filter)),
+                     &feat, SLOT(setFilter(FeatureDetectors::filter)));
 
     w.show();
 

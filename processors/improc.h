@@ -27,10 +27,12 @@ signals:
 
 private slots:
     void QImage2Mat(QImage inputImage);
+    void setFilter(filter _h);
 
 private:
     cv::Mat outMatImage;
     QImage  outQImage;
+    filter h;
 };
 
 #endif // IMPROC_H

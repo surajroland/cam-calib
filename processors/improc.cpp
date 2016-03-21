@@ -43,7 +43,7 @@ void FeatureDetectors::QImage2Mat(QImage inputImage)
       switch ( inputImage.format() )
       {
          // 8-bit, 4 channel
-         case QImage::Format_RGB32:
+         case QImage::Format_ARGB32:
          {
             outMatImage = cv::Mat( inputImage.height(), inputImage.width(), CV_8UC4, const_cast<uchar*>(inputImage.bits()), inputImage.bytesPerLine() );
          }
@@ -62,9 +62,13 @@ void FeatureDetectors::QImage2Mat(QImage inputImage)
          }
 
          default:
-            qWarning() << "ASM::QImageToCvMat() - QImage format not handled in switch:" << inputImage.format();
+            qWarning() << "FeatureDetectors::QImage2Mat(QImage inputImage) - QImage format not handled in switch:" << inputImage.format();
             break;
      }
 }
 
+void FeatureDetectors::setFilter(filter _h)
+{
+    h = _h;
+}
 

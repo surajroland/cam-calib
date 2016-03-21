@@ -26,7 +26,8 @@ public:
     ~MainWindow();
 
 signals:
-    void applyFilter(FeatureDetectors::filter h, QImage inputImage);
+    void sendImageToProcessor(QImage inputImage);
+    void sendSelectedFilter(FeatureDetectors::filter h);
 
 private slots:
     void loadButtonClicked();
@@ -35,7 +36,6 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-
     QString fileName;
     QPixmap image;
     QImage  *imageObject;

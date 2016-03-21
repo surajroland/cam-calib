@@ -45,10 +45,11 @@ void MainWindow::applyButtonClicked()
 {
     if(ui->filterCorners->isChecked())
     {
-        emit applyFilter(FeatureDetectors::CORNERS, *imageObject);
+        emit sendSelectedFilter(FeatureDetectors::CORNERS);
     }
     if(ui->filterEdges->isChecked())
     {
-        emit applyFilter(FeatureDetectors::EDGES, *imageObject);
+        emit sendSelectedFilter(FeatureDetectors::EDGES);
     }
+    emit sendImageToProcessor(*imageObject);
 }
