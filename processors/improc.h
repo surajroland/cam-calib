@@ -23,11 +23,11 @@ public:
      void Mat2Qpix(cv::Mat matImage);
 
 signals:
-    void returnQImageToMainwindow(QImage processesdImage);
+     void returnQImageToMainwindow(QImage processesdImage);
 
 private slots:
     void QImage2Mat(QImage inputImage);
-    void setFilter(filter _h);
+    void setFilter(FeatureDetectors::filter _h);
 
 private:
     cv::Mat outMatImage;
