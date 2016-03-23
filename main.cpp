@@ -6,11 +6,15 @@
 
 
 Q_DECLARE_METATYPE(cv::Mat)
+Q_DECLARE_METATYPE(FeatureDetectors::filter)
+Q_DECLARE_METATYPE(std::vector<cv::Point2f>)
+
 
 int main(int argc, char *argv[])
 {
-    qRegisterMetaType<cv::Mat>();
+    qRegisterMetaType<cv::Mat>("cv::Mat");
     qRegisterMetaType<FeatureDetectors::filter>("FeatureDetectors::filter");
+    qRegisterMetaType<std::vector<cv::Point2f>>("std::vector<cv::Point2f>");
 
     QApplication a(argc, argv);
 
