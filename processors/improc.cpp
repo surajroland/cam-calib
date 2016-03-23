@@ -1,9 +1,9 @@
 #include "processors/improc.h"
-#include "opencv2/highgui/highgui.hpp"
+
 
 inline void FeatureDetectors::convertMat2QImage(void)
 {
-    cvtColor(ImageToProcess, ImageToProcess, CV_BGRA2RGBA); // cvtColor Makes a copt, that what i need
+    cv::cvtColor(ImageToProcess, ImageToProcess, CV_BGRA2RGBA); // cvtColor Makes a copt, that what i need
 
     InOutQImage = QImage((const uchar *) ImageToProcess.data,
                        ImageToProcess.cols,
@@ -22,7 +22,7 @@ inline void FeatureDetectors::convertQImage2Mat(void)
                 CV_8UC4,(uchar*)InOutQImage.bits(),
                 InOutQImage.bytesPerLine());
 
-    cvtColor(temp, ImageToProcess, CV_BGRA2RGBA);
+    cv::cvtColor(temp, ImageToProcess, CV_BGRA2RGBA);
 }
 
 void FeatureDetectors::setFilter(filter _h)
@@ -36,7 +36,7 @@ void FeatureDetectors::applyFilterOnInputImage(QImage inputQImage)
     convertQImage2Mat();
 
     if (h == CORNERS) applyShiThomasiCornerDetector();
-//  if (h == EDGES) applySobelFilter();
+    if (h == EDGES) applySobelFilter();
 
     convertMat2QImage();
 
@@ -44,7 +44,23 @@ void FeatureDetectors::applyFilterOnInputImage(QImage inputQImage)
 }
 
 
-inline void FeatureDetectors::applyShiThomasiCornerDetector()
+inline void FeatureDetectors::applySobelFilter()
+{
+    cv::cvtColor(ImageToProcess, ImageToProcess, CV_RGBA2GRAY);
+
+    int edgeThresh = 1;
+    int lowThreshold = 10;
+    int ratio = 3;
+    int kernel_size = 3;
+
+    blur( ImageToProcess, ImageToProcess, cv::Size(3,3) );
+    Canny( ImageToProcess, ImageToProcess, lowThreshold, lowThreshold*ratio, kernel_size );
+
+    cv::cvtColor(ImageToProcess, ImageToProcess, CV_GRAY2BGRA);
+
+}
+
+void FeatureDetectors::applyShiThomasiCornerDetector()
 {
     std::vector<cv::Point2f> corners;
     double qualityLevel = 0.01;
@@ -52,24 +68,24 @@ inline void FeatureDetectors::applyShiThomasiCornerDetector()
     int blockSize = 3;
     bool useHarrisDetector = false;
     double k = 0.04;
-    int maxCorners = 1000;
+    int maxCorners = 100;
 
-    GaussianBlur( ImageToProcess, ImageToProcess, cv::Size(9, 9), 2, 2 );
+    cv::cvtColor(ImageToProcess, ImageToProcess, CV_RGBA2GRAY);
 
-    cv::imwrite("test.jpg", ImageToProcess);
+    cv::goodFeaturesToTrack( ImageToProcess,
+                             corners,
+                             maxCorners,
+                             qualityLevel,
+                             minDistance,
+                             cv::Mat(),
+                             blockSize,
+                             useHarrisDetector,
+                             k );
 
-//    cv::goodFeaturesToTrack( ImageToProcess,
-//                         corners,
-//                         maxCorners,
-//                         qualityLevel,
-//                         minDistance,
-//                         cv::Mat(),
-//                         blockSize,
-//                         useHarrisDetector,
-//                         k );
+    cv::cvtColor(ImageToProcess, ImageToProcess, CV_GRAY2BGRA);
 
-//    for( int i = 0; i < corners.size(); ++i )
-//    {
-//        circle( ImageToProcess, corners[i], 4, cv::Scalar(0,255,0), -1, 8, 0 );
-//    }
+    for( int i = 0; i < corners.size(); ++i )
+    {
+        circle( ImageToProcess, corners[i], 4, cv::Scalar(0,255,0), -1, 8, 0 );
+    }
 }
