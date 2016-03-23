@@ -1,26 +1,29 @@
 #include "processors/improc.h"
 
 
+
 inline void FeatureDetectors::convertMat2QImage(void)
 {
-    cv::Mat temp; // make the same cv::Mat
-    cvtColor(ImageToProcess, ImageToProcess, CV_BGR2RGB); // cvtColor Makes a copt, that what i need
+    cvtColor(ImageToProcess, ImageToProcess, CV_BGRA2RGBA); // cvtColor Makes a copt, that what i need
+
     InOutQImage = QImage((const uchar *) ImageToProcess.data,
                        ImageToProcess.cols,
                        ImageToProcess.rows,
                        ImageToProcess.step,
-                       QImage::Format_RGB888);
+                       QImage::Format_RGBA8888);
+
     InOutQImage.bits(); // enforce deep copy, see documentation
 }
 
 
 inline void FeatureDetectors::convertQImage2Mat(void)
 {
-    cv::Mat tmp(InOutQImage.height(),
+    cv::Mat temp(InOutQImage.height(),
                 InOutQImage.width(),
-                CV_8UC3,(uchar*)InOutQImage.bits(),
+                CV_8UC4,(uchar*)InOutQImage.bits(),
                 InOutQImage.bytesPerLine());
-    cvtColor(tmp, ImageToProcess, CV_BGR2RGB);
+
+    cvtColor(temp, ImageToProcess, CV_BGRA2RGBA);
 }
 
 void FeatureDetectors::setFilter(filter _h)
